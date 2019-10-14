@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="index.html">Loterias</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="meusJogos.html">Meus Jogos <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="conferirJogos.html">Conferir <span class="sr-only">(current)</span></a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="dados.html">Minha Conta <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="javascript:sair()" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Sair</a>
+        </li>
+      </ul>
+      <div>
+         <span class="text-info" id="userTexto"></span>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <script>
+
+
+      $(document).ready(function(){
+      
+           $.ajax({			//Função AJAX
+                    url:"./php/controle/usuarioControle.php",			//Arquivo php
+                    type:"post",				//Método de envio
+                    data: "acao=recuperarUsuarioLogado",	//Dados
+                       success: function (result){
+                          let retorno = JSON.parse(result);
+                          if (retorno.length == 0){
+                            location.href = "login.html"; 
+                          }
+                          $("#userTexto").text("Bem vindo "+retorno.usuario);
+                          
+                      }
+                  })
+      
+      
+      
+               
+          })
+          
+      </script>
+      

@@ -1,0 +1,9 @@
+Mysql 8
+PHP 7
+Xampp
+Bootstrap versao 4
+Jquery JS
+Requisições via Ajax com Jquery
+
+Eloquent PHP - ORM para banco de dados
+jsPDF

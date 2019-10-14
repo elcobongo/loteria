@@ -1,0 +1,311 @@
+<div class="container">
+<div class="alert alert-danger" role="alert" id="dvErrorLog"></div>
+<div class="alert alert-success" role="alert" id="dvSuccessLog"></div>
+
+<form id="frmConferir">
+  <input type="hidden" name="acao" id="acao" value="conferir"/>
+
+<div class="form-row">
+  <div class="form-group col-2 mr-3">
+    <label for="concurso">Concurso</label>
+    <input type="text" class="form-control" name="concurso" id="concurso" maxlength="5" placeholder="Ex: 1475"/>
+  </div>
+
+  <div class="form-group mr-3">
+      <label for="concurso">&nbsp;</label>
+      <button type="button" class="form-control btn btn-primary" onclick="javascript:buscarResultado()" >Buscar Resultado</button>
+  </div>
+  <div class="form-group mr-3">
+      <label for="concurso">&nbsp;</label>
+      <button type="button" class="form-control btn btn-primary" onclick="javascript:conferirResultado()" >Conferir Resultado</button>
+  </div>
+  <div class="form-group">
+      <label for="concurso">&nbsp;</label>
+      <button type="button" class="form-control btn btn-primary" onclick="javascript:window.history.back()">Voltar</button>
+  </div>
+</div>
+
+</form>
+
+
+<div class="jumbotron">
+    <h4 class="text-center text-success">Lotofácil</h4>
+
+    <div class="row">
+      <h4>Sorteio do concurso</h4>
+    </div>
+    <div class="row">
+      <div class="col"> <p class="lead">Números</p></div>
+
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+      <div class="col"> <p class="lead"></p></div>
+
+
+  </div>
+
+
+<br/>
+
+  <table id="tabelaConferencia" class="display text-center h6" style="width:99%;font-size: 10pt;">
+    <thead>
+        <tr>
+            <th width="5%">CÓDIGO</th>
+            <th width="55%">JOGOS</th>
+            <th width="35%">NÚMERO ACERTADOS</th>
+            <th width="5%">QT. ACERTOS</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+
+
+  </div>
+
+
+
+</div>
+
+
+<script>
+    $('#dvErrorLog').hide();
+    $('#dvSuccessLog').hide();
+    var table = null;
+    var sorteado_num1 = 0;
+    var sorteado_num2 = 0;
+    var jogos = null;
+
+$(document).ready(function(){
+
+
+
+})
+
+
+    function buscarResultado(){
+
+
+            var concurso=$('#concurso');
+
+
+            /*if (concurso.val() == ''){
+              $('#dvErrorLog').text('Nº concurso não informado');
+              concurso.focus();
+              $('#dvErrorLog').show();
+              return false;
+            }*/
+
+
+            $.ajax({			//Função AJAX
+              url:"./php/controle/conferirLotoFacilControle.php",			//Arquivo php
+              type:"get",				//Método de envio
+              data: $("#frmConferir").serialize(),	//Dados
+                 success: function (result){			//Sucesso no AJAX
+                  $('#dvErrorLog').hide();
+                  $('#dvSuccessLog').hide();
+
+                  var retorno = JSON.parse(result)
+
+                  sorteado_num1 = retorno.sorteio[0];
+                  sorteado_num2 = retorno.sorteio[1];
+                  sorteado_num3 = retorno.sorteio[2];
+                  sorteado_num4 = retorno.sorteio[3];
+                  sorteado_num5 = retorno.sorteio[4];
+
+                  sorteado_num6 = retorno.sorteio[5];
+                  sorteado_num7 = retorno.sorteio[6];
+                  sorteado_num8 = retorno.sorteio[7];
+                  sorteado_num9 = retorno.sorteio[8];
+                  sorteado_num10 = retorno.sorteio[9];
+
+                  sorteado_num11 = retorno.sorteio[10];
+                  sorteado_num12 = retorno.sorteio[11];
+                  sorteado_num13 = retorno.sorteio[12];
+                  sorteado_num14 = retorno.sorteio[13];
+                  sorteado_num15 = retorno.sorteio[14];
+
+                  sorteado_num16 = retorno.sorteio[15];
+                  sorteado_num17 = retorno.sorteio[16];
+                  sorteado_num18 = retorno.sorteio[17];
+
+                  $(".jumbotron .row:first h4:first").text("Sorteio do concurso "+retorno.numero);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(2) p:nth-child(1)").text(sorteado_num1);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(3) p:nth-child(1)").text(sorteado_num2);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(4) p:nth-child(1)").text(sorteado_num3);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(5) p:nth-child(1)").text(sorteado_num4);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(6) p:nth-child(1)").text(sorteado_num5);
+
+                  $(".jumbotron .row:nth-child(3) div:nth-child(7) p:nth-child(1)").text(sorteado_num6);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(8) p:nth-child(1)").text(sorteado_num7);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(9) p:nth-child(1)").text(sorteado_num8);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(10) p:nth-child(1)").text(sorteado_num9);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(11) p:nth-child(1)").text(sorteado_num10);
+
+                  $(".jumbotron .row:nth-child(3) div:nth-child(12) p:nth-child(1)").text(sorteado_num11);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(13) p:nth-child(1)").text(sorteado_num12);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(14) p:nth-child(1)").text(sorteado_num13);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(15) p:nth-child(1)").text(sorteado_num14);
+                  $(".jumbotron .row:nth-child(3) div:nth-child(16) p:nth-child(1)").text(sorteado_num15);
+
+                  }
+            })
+
+    }
+
+
+
+
+function conferirResultado(){
+  var qt_acertos = 0;
+  var tableConferencia = null;
+  var conferido = new Array();
+  $.ajax({			//Função AJAX
+          url:"./php/controle/lotoFacilControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: "acao=recuperar&modalidade=lotofacil",	//Dados
+             success: function (result){			//Sucesso no AJAX
+              jogos = JSON.parse(result);
+
+  jogos.forEach(function (item, index){
+    var jogos_conferido = new Array();
+    jogos_conferido['id'] = item[0]; //id registro
+    jogos_conferido['volante'] = item[1]; //volante
+    jogos_conferido['qt_acertos'] = 0;  //qt acertos
+    jogos_conferido['numeros_acertos'] = new Array();  //numeros acertados
+    qt_acertos = 0;
+    //split - converte string para array
+    var volante = (item[1].split(" - "));
+    volante.forEach(function (numero_jogado, index){
+      if (numero_jogado == sorteado_num1){
+        //push - adiciona item no array
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num2){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num3){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num4){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num5){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num6){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num7){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num8){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num9){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num10){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num11){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num12){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num13){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num14){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+      if (numero_jogado == sorteado_num15){
+        jogos_conferido['numeros_acertos'].push(numero_jogado);
+        qt_acertos++;
+      }
+
+
+      jogos_conferido['qt_acertos'] = qt_acertos;
+
+    })
+    //join - convert array para string
+    jogos_conferido['numeros_acertos'] = jogos_conferido['numeros_acertos'].join(" - ");
+    conferido.push(jogos_conferido);
+  });
+
+
+var saida = new Array();
+conferido.forEach(function(value, index){
+var linha = new Array();
+linha.push(value['id']);
+linha.push(value['volante']);
+linha.push(value['numeros_acertos']);
+linha.push(value['qt_acertos']);
+saida.push(linha);
+})
+
+
+                          tableConferencia = $('#tabelaConferencia').DataTable({
+                            "bInfo": false,
+                            "pageLength": 50,
+                            "destroy": true,
+                            "lengthChange": false,
+                            "data" : saida,
+                            "order": [ 3, "desc" ],
+                            "sDom": "lrtip",
+                            "language": {
+                                "emptyTable": "Não há registros",
+                                "zeroRecords": "Não há registros.",
+                                "oPaginate": {
+                                  "sNext": "Próximo",
+                                  "sLast": "",
+                                  "sFirst": "",
+                                  "sPrevious": "Anterior"
+                                }
+                            }
+
+
+                        });
+
+
+             }
+
+  })
+}
+
+
+
+
+    </script>

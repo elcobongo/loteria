@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Loteria">
+    <title>Conferência de Resultados</title>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body {
+  padding-top: 5rem;
+  background:#f9fde8;
+}
+.starter-template {
+  
+  text-align: center;
+  
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="menu"></div>
+    
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>Confira seus jogos</h1>
+    <p class="lead">Escolha uma das modalidades abaixo</p>
+
+
+    <div class="row">
+        <div class="col m-3 p-3 shadow bg-white">
+            <img src="./img/MEGA-SENA.jpg"/>
+            <p>A Mega-sena é a loteria que paga milhões para o acertador dos 6 números.</p>
+            <a href="conferirJogo.html?modalidade=megasena">Conferir Jogo</a>
+    
+          </div>
+      <div class="col m-3 p-3 shadow bg-white">
+        <img src="./img/loto-facil.png"/>
+        <p>A Lotofácil é a loteria certa para você que gosta de apostar e, principalmente, ganhar.</p>
+        <a href="conferirJogo.html?modalidade=lotofacil">Conferir Jogo</a>
+
+      </div>
+      <div class="col m-3 p-3 shadow bg-white">
+          <img src="./img/timemania.png"/>
+          <p>No Timemania, seu palpite pode valer uma bolada. São oitenta números e oitenta clubes de futebol.</p>
+          <a href="conferirJogo.html?modalidade=timemania">Conferir Jogo</a>
+  
+        </div>
+        <div class="col m-3 p-3 shadow bg-white">
+            <img src="./img/QUINA.jpg"/>
+            <p>Na Quina, você aposta de 5 a 15 números, entre os 80 disponíveis, e concorre a prêmios grandiosos.</p>
+            <a href="conferirJogo.html?modalidade=quina">Conferir Jogo</a>
+    
+          </div>
+    </div>
+
+    <div class="row">
+        <div class="col m-3 p-3 shadow bg-white">
+            <img src="./img/logo_lotomania.png"/>
+            <p>Na Lotomania, você escolhe 50 números e ganha se acertar 15, 16, 17, 18, 19, 20 ou nenhum número.</p>
+            <a href="conferirJogo.html?modalidade=lotomania">Conferir Jogo</a>
+    
+          </div>
+      <div class="col m-3 p-3 shadow bg-white">
+        <img src="./img/DUPLA+SENA.jpg"/>
+        <p>Na Dupla Sena, com o mesmo bilhete, você participa de dois sorteios por concurso e ganha se acertar 3, 4, 5 ou 6 números.</p>
+        <a href="conferirJogo.html?modalidade=duplasena">Conferir Jogo</a>
+
+      </div>
+      <div class="col m-3 p-3 shadow bg-white">
+          <img src="./img/FEDERAL.jpg"/>
+          <p>Você tem diversas chances de acertar o prêmio principal, e também pode ganhar se acertar uma das outras opções de aposta.</p>
+          <a href="conferirJogo.html?modalidade=federal">Conferir Jogo</a>
+  
+        </div>
+        <div class="col m-3 p-3 shadow bg-white">
+            <img src="./img/logo_loteca.png"/>
+            <p>A Loteca é a loteria ideal para você que entende de futebol. Para apostar, você deve marcar o seu palpite para cada um dos 14 jogos do concurso.</p>
+            <a href="conferirJogo.html?modalidade=loteca">Conferir Jogo</a>
+    
+          </div>
+    </div>
+  </div>
+
+</main><!-- /.container -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="js/loteria.js"></script>
+
+<script>
+
+
+$(document).ready(function(){
+     
+     $.ajax({			//Função AJAX
+              url:"./php/controle/usuarioControle.php",			//Arquivo php
+              type:"post",				//Método de envio
+              data: "acao=recuperarUsuarioLogado",	//Dados
+                 success: function (result){
+                    let retorno = JSON.parse(result);
+                    if (retorno.length == 0){
+                      location.href = "login.html"; 
+                    }
+                    $("#userTexto").text("Bem vindo "+retorno.usuario);
+                    
+                }
+            })
+
+      //carregar menu html   
+      $('#menu').load('menu.html');
+
+
+         
+    })
+    
+</script>
+
+
+      </body>
+</html>

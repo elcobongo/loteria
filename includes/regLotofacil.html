@@ -1,0 +1,383 @@
+
+<div class="container">
+<div class="alert alert-danger" role="alert" id="dvErrorLog"></div>
+<div class="alert alert-success" role="alert" id="dvSuccessLog"></div>
+
+
+
+
+<div class="modal fade" id="modalConfirmaExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exclusão</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalMsgExclusao">
+        Deseja excluir jogo selecionado ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="confirmaExclusao()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6 offset-sm-3 text-center">
+
+<form id="frmJogos">  
+    <input type="hidden" name="acao" id="acao" value="registrar_jogo"/>
+    <input type="hidden" name="modalidade" id="modalidade"/>
+    <input type="hidden" name="id" id="id"/>
+
+
+            <div class="form-group ">
+                
+                <label>Utilize os campos para informar o números apostados</label>
+                <div class="row">
+                    
+                    <div class="col text-center" >
+                        <small>1</small>
+                      <input type="text" class="form-control text-center" id="num1" name="num1" maxlength="2" />
+                    </div>
+                    <div class="col text-center" >
+                        <small>2</small>
+                        <input type="text" class="form-control text-center" id="num2" name="num2" maxlength="2" />
+                    </div>
+
+                    <div class="col text-center">
+                        <small>3</small>
+                        <input type="text" class="form-control text-center" id="num3" name="num3" maxlength="2" />
+                      </div>
+                      <div class="col text-center">
+                        <small>4</small>
+                          <input type="text" class="form-control text-center"  id="num4" name="num4" maxlength="2" />
+                      </div>
+
+                      <div class="col text-center">
+                        <small>5</small>
+                          <input type="text" class="form-control text-center"  id="num5" name="num5" maxlength="2" />
+                      </div>
+                </div>
+                <div class="row">
+
+
+                      <div class="col text-center">
+                        <small>6</small>
+                          <input type="text" class="form-control text-center"  id="num6" name="num6" maxlength="2"/>
+                        </div>
+                        <div class="col text-center">
+                            <small>7</small>
+                            <input type="text" class="form-control text-center"  id="num7" name="num7" maxlength="2" />
+                        </div>
+    
+                        <div class="col text-center">                           
+                            <small>8</small>
+                            <input type="text" class="form-control text-center"  id="num8" name="num8" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>9</small>
+                              <input type="text" class="form-control text-center"  id="num9" name="num9" maxlength="2"/>
+                          </div>
+    
+                          <div class="col text-center">
+                            <small>10</small>
+                              <input type="text" class="form-control text-center"  id="num10" name="num10" maxlength="2"/>
+                          </div>
+                </div>
+                <div class="row">
+
+                          <div class="col text-center">
+                            <small>11</small>
+                              <input type="text" class="form-control text-center"  id="num11" name="num11" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>12</small>
+                              <input type="text" class="form-control text-center"  id="num12" name="num12" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>13</small>
+                              <input type="text" class="form-control text-center"  id="num13" name="num13" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>14</small>
+                              <input type="text" class="form-control text-center"  id="num14" name="num14" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>15</small>
+                              <input type="text" class="form-control text-center"  id="num15" name="num15" maxlength="2"/>
+                          </div>
+                </div>
+                <div class="row" style="width: 64%">
+                        <div class="col text-center">
+                            <small>16</small>
+                              <input type="text" class="form-control text-center"  id="num16" name="num16" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>17</small>
+                              <input type="text" class="form-control text-center"  id="num17" name="num17" maxlength="2"/>
+                          </div>
+                          <div class="col text-center">
+                            <small>18</small>
+                              <input type="text" class="form-control text-center"  id="num18" name="num18" maxlength="2"/>
+                          </div>
+                
+              </div>
+              
+              
+              <div class="row">
+                <div class="col text-center mt-4">
+                  <button type="button" class="btn btn-primary" onclick="javascript:$('#frmJogos').trigger('reset')">Limpar</button>
+                  <button type="button" class="btn btn-primary" onclick="javascript:gravar()" >Salvar</button>
+                  <button type="button" class="btn btn-primary" onclick="javascript:gerarPDF()" >Gerar PDF</button>
+                  <button type="button" class="btn btn-primary" onclick="javascript:window.history.back()">Voltar</button>
+                </div>
+              </div>
+</form>
+</div>
+
+
+</div>
+   
+
+</div>
+
+
+
+<table id="tabela" class="display text-center h6" style="width:100%;">
+        <thead>
+            <tr>
+                <th width="5%">CÓDIGO</th>
+                <th width="70%">NÚMEROS</th>
+                <th width="25%"></th>
+            </tr>
+        </thead>
+        <tbody>
+                                        
+        </tbody>
+    </table>	
+    
+
+<script>
+$('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+$('#dvSuccessLog').hide();
+var table = null;
+var id_jogo = 0;
+var nrs = "";
+
+$(document).ready(function(){
+  $("#modalidade").val(GetURLParameter('modalidade'));
+  $('#num1').mask('00');
+  $('#num2').mask('00');
+  $('#num3').mask('00');
+  $('#num4').mask('00');
+  $('#num5').mask('00');
+
+  $('#num6').mask('00');
+  $('#num7').mask('00');
+  $('#num8').mask('00');
+  $('#num9').mask('00');
+  $('#num10').mask('00');
+
+  $('#num11').mask('00');
+  $('#num12').mask('00');
+  $('#num13').mask('00');
+  $('#num14').mask('00');
+  $('#num15').mask('00');
+
+  $('#num16').mask('00');
+  $('#num17').mask('00');
+  $('#num18').mask('00');
+
+  
+  recuperarJogo();
+
+
+})
+
+function recuperarJogo(){
+    $.ajax({			//Função AJAX
+          url:"./php/controle/lotoFacilControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: "acao=recuperar&modalidade=lotofacil",	//Dados
+             success: function (result){			//Sucesso no AJAX
+                        var retorno = JSON.parse(result);
+
+                        
+                        table = $('#tabela').DataTable({
+                            "bInfo": false,
+                            "pageLength": 50,
+                            "lengthChange": false,
+                            "data" : retorno,
+                            "order": [ 0, "desc" ],
+                            "sDom": "lrtip",
+                            "language": {
+                                "emptyTable": "Não há registros",
+                                "zeroRecords": "Não há registros.",
+                                "oPaginate": {
+                                  "sNext": "Próximo",
+                                  "sLast": "",
+                                  "sFirst": "",
+                                  "sPrevious": "Anterior"
+                                }
+                            },
+                            "columnDefs": [ {
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<button type='button' id='btnEditar' class='btn btn-success' style='float:left'>Editar</button> <button type='button' id='btnExcluir' class='btn btn-danger'>Excluir</button>"
+                        } ]
+                            
+                        });
+
+                        $('#tabela tbody').on( 'click', '#btnEditar', function () {
+                            var data = table.row( $(this).parents('tr') ).data();
+                            //alert( data[1] +"'s editar is: "+ data[0] );
+                            var numeros = data[1].split(" - ");
+                            $("#num1").val(numeros[0]);
+                            $("#num2").val(numeros[1]);
+                            $("#num3").val(numeros[2]);
+                            $("#num4").val(numeros[3]);
+                            $("#num5").val(numeros[4]);
+
+                            $("#num6").val(numeros[5]);
+                            $("#num7").val(numeros[6]);
+                            $("#num8").val(numeros[7]);
+                            $("#num9").val(numeros[8]);
+                            $("#num10").val(numeros[9]);
+
+                            $("#num11").val(numeros[10]);
+                            $("#num12").val(numeros[11]);
+                            $("#num13").val(numeros[12]);
+                            $("#num14").val(numeros[13]);
+                            $("#num15").val(numeros[14]);
+
+                            $("#num16").val(numeros[15]);
+                            $("#num17").val(numeros[16]);
+                            $("#num18").val(numeros[17]);
+
+                            $("#id").val(data[0]);
+                        } );
+
+                        $('#tabela tbody').on( 'click', '#btnExcluir', function () {
+                            var data = table.row( $(this).parents('tr') ).data();
+                            excluir(data[0]);
+                        } );
+
+                        
+                        
+                    }
+        })
+
+}
+
+
+
+
+function gravar(){
+$('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+$('#dvSuccessLog').hide();
+
+  $.ajax({			//Função AJAX
+          url:"./php/controle/lotoFacilControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: $("#frmJogos").serialize(),	//Dados
+             success: function (result){			//Sucesso no AJAX
+                var retorno = JSON.parse(result);
+                        if(retorno.codRetorno == 1){		
+                            $("#frmJogos").trigger("reset");
+                          $('#dvSuccessLog').text(retorno.txMotivo);
+                          $('#dvSuccessLog').show();
+                          table.destroy();
+                          recuperarJogo();
+                        }  else {
+                            $('#dvErrorLog').text(retorno.txMotivo);
+                          $('#dvErrorLog').show();
+                        }
+                    }
+        })
+
+}
+
+
+function confirmaExclusao(){
+  $.ajax({			//Função AJAX
+          url:"./php/controle/lotoFacilControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: "acao=excluir&id="+id_jogo,	//Dados
+             success: function (result){			//Sucesso no AJAX
+                
+                          $("#modalConfirmaExcluir").modal('hide');
+                          $('#dvSuccessLog').text('Jogo excluído com sucesso');
+                          $('#dvSuccessLog').show();
+                          table.destroy();
+                          recuperarJogo();
+                        }  
+                    
+        })
+
+}
+
+function excluir(id){
+  $('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+  $('#dvSuccessLog').hide();
+  id_jogo = id;
+  $("#modalMsgExclusao").html("Deseja excluir jogo "+id+ "?");
+  $("#modalConfirmaExcluir").modal('show');
+}
+
+function gerarPDF(){
+    
+
+   /*doc.setProperties({
+    title: 'Jogos de loteria',
+    subject: 'Trabalho acadêmico',
+    author: 'Elson Souza',
+    keywords: 'loteria, lotomania',
+    creator: 'jsPDF'
+    });*/
+
+
+
+    $.ajax({			//Função AJAX
+          url:"./php/controle/lotoFacilControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: "acao=recuperar&modalidade=lotofacil",	//Dados
+             success: function (result){			//Sucesso no AJAX
+              var retorno = JSON.parse(result);
+
+              if (retorno != null){
+              
+
+               var doc = new jsPDF();
+               var pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
+               var pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+               
+               doc.text("Meus jogos - Lotomania", pageWidth /2, 15, "center");
+
+
+
+                
+                let linha_inicial_jogos = 20;
+                for (let index = 0; index < retorno.length; index++) {
+                  const element = retorno[index];
+                  doc.text(10, linha_inicial_jogos + (10 * (index + 1)), element[1]);
+                  
+                }
+
+                doc.save("jogos.pdf");
+              } else {
+                alert("Não há apostas cadastradas");
+              }
+                        
+             }
+    });
+
+
+
+}
+</script>

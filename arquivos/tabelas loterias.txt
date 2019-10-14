@@ -1,0 +1,35 @@
+CREATE TABLE `usuario` (
+	id INT NOT NULL primary key auto_increment,
+	nome varchar(30),
+	sobrenome varchar(30),
+	email varchar(50),
+	tel varchar(30),
+	senha varchar(100),
+	created_at timestamp,
+	updated_at timestamp
+);
+
+create table jogo (
+id integer not null primary key auto_increment,
+id_usuario integer not null,
+modalidade integer not null,
+num1 integer default 0,
+num2 integer default 0,
+num3 integer default 0,
+num4 integer default 0,
+num5 integer default 0,
+
+num6 integer default 0,
+num7 integer default 0,
+num8 integer default 0,
+num9 integer default 0,
+num10 integer default 0,
+
+num11 integer default 0,
+num12 integer default 0,
+num13 integer default 0,
+num14 integer default 0,
+num15 integer default 0,
+
+created_at timestamp,
+updated_at timestamp)

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Loteria">
+    <title>Conferência de Resultados</title>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body {
+  padding-top: 5rem;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="menu"></div>
+    
+
+<main role="main" class="container">
+
+    <div class="alert alert-danger" role="alert" id="dvErrorLog"></div>
+    <div class="alert alert-success" role="alert" id="dvSuccessLog"></div>
+    <form id="frmDados">  
+        <input type="hidden" name="acao" id="acao" value="atualizar"/>
+        <input type="hidden" name="id" id="id" />
+
+        <div class="form-group">
+            <label for="primeiroNome">Primeiro Nome</label>
+            <input type="text" class="form-control" name="primeiroNome" id="primeiroNome" maxlength="30"/>
+        </div>
+        <div class="form-group">
+            <label for="primeiroNome">Último Nome</label>
+            <input type="text" class="form-control" name="ultimoNome" id="ultimoNome" maxlength="30" />
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" name="email" id="email" maxlength="50" readonly/>
+        </div>
+      
+        <div class="form-group">
+            <label for="email">Telefone</label>
+            <input type="tel" class="form-control" name="tel" id="tel" maxlength="30" >
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="text" class="form-control " name="senha" id="senha" maxlength="12" readonly>
+        </div>        
+
+                  
+    
+                  <button type="button" class="btn btn-primary" onclick="javascript:gravar()" >Salvar</button>
+
+                  <button type="button" class="btn btn-primary" onclick="javascript:excluir()" >Excluir Conta</button>
+    </form>
+
+  
+</main><!-- /.container -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/jquery/jquery.mask.js"></script>
+<script src="js/loteria.js"></script>
+
+<script>
+
+$('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+$('#dvSuccessLog').hide();
+
+
+$(document).ready(function(){
+      //carregar menu html   
+      $('#menu').load('menu.html');
+      $('#tel').mask('(00) 00000-0000');
+      recuperarDados();
+
+    })
+
+function recuperarDados(){
+  $.ajax({			//Função AJAX
+          url:"./php/controle/usuarioControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: "acao=recuperarDados",	//Dados
+             success: function (result){			//Sucesso no AJAX
+                        var retorno = JSON.parse(result);
+                        $("#id").val(retorno.id);
+                        $("#primeiroNome").val(retorno.nome);
+                        $("#ultimoNome").val(retorno.sobrenome);
+                        $("#email").val(retorno.email);
+                        $("#tel").val(retorno.tel);
+                        $("#senha").val(retorno.senha);
+
+                    }
+        })
+
+}
+
+
+function gravar(){
+
+  $('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+  $('#dvSuccessLog').hide();
+
+
+  var primeiroNome=$('#primeiroNome');	
+  var ultimoNome=$('#ultimoNome');	
+  var tel=$('#tel');	
+  var senha=$('#senha');	
+
+        
+  if (primeiroNome.val() == ''){
+    $('#dvErrorLog').text('Primeiro nome não informado');
+    primeiroNome.focus();
+    $('#dvErrorLog').show();
+    return false;
+  }
+
+  if (ultimoNome.val() == ''){
+          $('#dvErrorLog').text('Último nome não informado');
+          ultimoNome.focus();
+          $('#dvErrorLog').show();
+          return false;
+  }
+
+  if (tel.val() == ''){
+          $('#dvErrorLog').text('Telefone não informado');
+          tel.focus();
+          $('#dvErrorLog').show();
+          return false;
+  }
+
+  if (senha.val()== ''){
+          $('#dvErrorLog').text('Senha não informada');
+          $('#senha').focus();
+          $('#dvErrorLog').show();
+          return false;
+  }
+
+  if ((senha.val().length < 7) || (senha.val().length > 12)){
+          $('#dvErrorLog').text('Senha deve ter entre 8 e 12 caracteres');
+          $('#senha').focus();
+          $('#dvErrorLog').show();
+          return false;
+  }
+
+
+  
+  
+  $.ajax({			//Função AJAX
+          url:"./php/controle/usuarioControle.php",			//Arquivo php
+          type:"post",				//Método de envio
+          data: $("#frmDados").serialize(),	//Dados
+             success: function (result){			//Sucesso no AJAX
+                        if(result==1){		
+                          $('#dvSuccessLog').text('Registro efetuado com sucesso');
+                          $('#dvSuccessLog').show();
+                        } 
+                    }
+        })
+
+}
+
+
+function excluir(){
+
+$('#dvErrorLog').hide(); //Esconde o elemento com id errolog
+$('#dvSuccessLog').hide();
+
+
+var id=$('#id').val();	
+
+
+$.ajax({			//Função AJAX
+        url:"./php/controle/usuarioControle.php",			//Arquivo php
+        type:"get",				//Método de envio
+        data: "acao=excluir",	//Dados
+           success: function (result){			//Sucesso no AJAX
+            if (result == 1){
+                    window.location.href = "login.html";
+                  }      
+          }
+      })
+
+}
+    
+</script>
+
+
+      </body>
+</html>

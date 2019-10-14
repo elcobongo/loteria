@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Loteria SB Admin 2 - Forgot Password</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-2">Esqueceu a senha?</h1>
+                    <p class="mb-4">Informe seu email para recuperar a senha!</p>
+                  </div>
+                  <div class="alert alert-danger" role="alert" id="dvErrorLog"></div>
+                  <div class="alert alert-success" role="alert" id="dvSuccessLog"></div>
+                  <div class="alert alert-info" role="alert" id="dvInfoLog"></div>
+                  <form id="formUser" class="user">
+                      <input type="hidden" name="acao" id="acao" value="recuperar"/>
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <button onclick="javascript:recuperar()" type="button"  class="btn btn-primary btn-user btn-block">Recuperar</button>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                      <a class="small" href="login.html">Já tem uma conta? Login!</a>
+                    </div>
+                    <div class="text-center">
+                        <a class="small" href="registrar.html">Criar uma conta</a>  
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <script>
+      $('#dvErrorLog').hide();
+      $('#dvSuccessLog').hide();
+      $('#dvInfoLog').hide();
+
+      function recuperar(){
+        $('#dvErrorLog').hide();
+        $('#dvSuccessLog').hide();
+        $('#dvInfoLog').hide();
+
+        var email=$('#email');
+        if (email.val() == ''){
+          $('#dvErrorLog').text('Email não informado');
+          email.focus();
+          $('#dvErrorLog').show();
+          return false;
+        }
+
+        $.ajax({			//Função AJAX
+          url:"./php/controle/usuarioControle.php",			//Arquivo php
+          type:"get",				//Método de envio
+          data: $("#formUser").serialize(),	//Dados
+             success: function (result){			//Sucesso no AJAX
+              if (result == ""){
+                $('#dvErrorLog').text('E-mail não cadastrado');
+                $('#dvErrorLog').show();
+              } else {
+                  var retorno = JSON.parse(result);
+                  $('#dvInfoLog').text('E-mail enviado para '+retorno.email);
+                  $('#dvInfoLog').show();
+              }
+                        
+              }
+        })
+        
+        
+
+
+      }
+      
+  </script>
+</body>
+
+</html>

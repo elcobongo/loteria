@@ -1,0 +1,13 @@
+Inclusão de funçoes no sistema:
+
+1 - para se cadastrar no sistema o usuário irá usar um nome, um email e um telefone;
+2 - senha composta por letras e números entre 8 e 12 caracteres. A senha deverá ser armazenada no banco de dados;
+3 - esqueci minha senha;
+4 - dentro do sistema:
+a) escolher modalidade de lotérica;
+b) dentro da modalidade loterica o usuário poderá clicar no botão VOLTAR para voltar à página de modalidade lotérica;
+c) dentro da modalidade loterica o usuário poderá clicar no botão MINHAS APOSTAS e o sistema mostrará a relação das apostas feitas;
+d) dentro da modalidade loterica o usuário poderá clicar no botão INCLUIR ou ALTERAR ou EXCLUIR uma aposta;
+e) o sistema informará mensagem de aviso caso a aposta não estiver com todos os campos preenchidos ou com algum número fora do range de aposta;
+f) o sistema deverá ter um botão para ALTERAR DADOS PESSOAIS;
+g) 

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Loteria">
+    <title>Conferência de Resultados</title>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body {
+  padding-top: 5rem;
+}
+
+    </style>
+  </head>
+  <body style="background:#f9fde8">
+    <div id="menu"></div>
+    
+
+<main role="main" class="container">
+
+<div id="conteudo"></div>
+
+  
+</main><!-- /.container -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<link href="./vendor/datatables/jquery.dataTables.min.css" rel="stylesheet"/>
+<script src="./vendor/datatables/jquery.dataTables.min.js"></script>
+
+<script src="js/loteria.js"></script>
+
+<script>
+
+
+$.ajaxSetup({
+    cache: false
+});
+$(document).ready(function(){
+      //carregar menu html   
+      $('#menu').load('menu.html');
+
+      if (GetURLParameter('modalidade') != 'lotofacil'){
+        $("#conteudo").load('includes/confLoterias.html');
+      } else {
+        $("#conteudo").load('includes/confLotofacil.html');
+      }     
+
+
+         
+    })
+    
+</script>
+
+
+      </body>
+</html>
